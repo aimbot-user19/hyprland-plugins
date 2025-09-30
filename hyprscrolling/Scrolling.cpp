@@ -1468,4 +1468,16 @@ SP<SWorkspaceData> CScrollingLayout::currentWorkspaceData() {
 CBox CScrollingLayout::usableAreaFor(PHLMONITOR m) {
     return CBox{m->m_reservedTopLeft, m->m_size - m->m_reservedTopLeft - m->m_reservedBottomRight};
 }
+void CScrollingLayout::onWindowFocusChange(PHLWINDOW wh) {
+    if (!wh)
+        return;
+    const auto DATA = dataFor(wh);
+    const auto WS   = dataFor(wh->m_workspace);
+    const auto COL  = DATA->column.lock();
+    if (!DATA || !WS || !COL)
+        return;
+    WS->centerOrFitCol(COL);
+    WS->recalculate();
+}
+
 
