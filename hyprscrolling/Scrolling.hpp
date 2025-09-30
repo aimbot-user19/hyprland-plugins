@@ -104,6 +104,8 @@ class CScrollingLayout : public IHyprLayout {
     virtual void                     onDisable();
 
     CBox                             usableAreaFor(PHLMONITOR m);
+    void                             onWindowFocusChange(PHLWINDOW wh);
+
 
   private:
     std::vector<SP<SWorkspaceData>> m_workspaceDatas;
